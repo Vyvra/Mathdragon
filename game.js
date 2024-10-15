@@ -1,5 +1,5 @@
-let level = 0;
-let score = 0;
+let level = localStorage.getItem("level") || 0;
+let score = localStorage.getItem("score") || 0;
 let a = 0;
 let b = 0;
 
@@ -37,8 +37,9 @@ function checkAnswer() {
 function updateLevelAndScore() {
   // update score 
   document.getElementById('score').innerHTML = "Score : " + score
+  localStorage.setItem("score", score)
   // update level
-  let dragonSize = ["font-size:", score * 3 + 20, "px"].join("")
+  let dragonSize = ["font-size:", score * 4 + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
   // document.getElementById('level').innerHTML = ':evel : ' + level
 }
