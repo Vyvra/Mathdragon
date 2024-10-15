@@ -1,5 +1,7 @@
-let level = localStorage.getItem("level") || 0;
-let score = localStorage.getItem("score") || 0;
+let level = 0;
+let score = 0;
+
+
 let a = 0;
 let b = 0;
 
@@ -39,22 +41,31 @@ function updateLevelAndScore() {
   document.getElementById('score').innerHTML = "Score : " + score
   localStorage.setItem("score", score)
   // update level
-  let dragonSize = ["font-size:", score * 4 + 20, "px"].join("")
+  let dragonSize = ["font-size:", (score * 4) + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
   // document.getElementById('level').innerHTML = ':evel : ' + level
 }
 
 
 function gameloop(event) {
-  event.preventDefault()
+  console.log(localStorage.getItem("score"));
+  event.preventDefault();
   checkAnswer();
   updateLevelAndScore();
   poseQuestion();
 }
 
+savedscore = localStorage.getItem('score')
+score += Number(savedscore)
 updateLevelAndScore();
 poseQuestion();
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
+
+const reset = document.querySelector('#reset');
+reset.addEventListener("click", () => { score = 0; updateLevelAndScore(); })
+
+
+
 
 // game()

@@ -10,22 +10,28 @@
 
 <body>
   <div class="container">
-    <h1> Mathdragon!</h1>
-    <div class="hud">
-      <!-- <div id='level'></div> -->
-      <div id='score'>score:</div>
+    <div class="top">
+      <h1> Mathdragon!</h1>
+      <a style="cursor :pointer;" id='reset'>Reset</a>
+      <div class="hud">
+        <!-- <div id='level'></div> -->
+        <div id='score'>score:</div>
+      </div>
     </div>
     <div class="wherethedragonlives">
       <div class="dragon" id="dragon"> &#128009</div>
     </div>
     <div id="result"></div>
-    <div class="answerarea">
-      <div id="question"></div>
-      <form id="answerbox">
+    <div class="answercontainer">
+      <div class="answersmall">
+        <div id="question"></div>
+        <form id="answerbox">
 
-        <input type="number" id='answer' placeholder=" ? " autofocus="autofocus"> <button type="submit" id='submit'
-          hidden></button>
-      </form>
+          <input type="number" id='answer' placeholder=" ? " autofocus="autofocus"> <button type="submit" id='submit'
+            hidden></button>
+
+        </form>
+      </div>
     </div>
   </div>
 

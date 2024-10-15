@@ -8,30 +8,21 @@
 
 * {
   font-family: var(--font-family);
+  margin: 0;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /*align-items: center;*/
   height: 100vh
 }
 
-h1 {
-  padding: 0.25rem;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-  background-color: green;
-  color: orangered;
-  border-radius: 0.5rem;
-  border-color: orangered;
-  border-style: solid;
-}
-
-.hud {
+.top {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
+  background-color: green;
+  align-items: center;
+  gap: 16px;
   font-size: 1rem;
   font-weight: bold;
   padding: 0.25rem;
@@ -39,32 +30,50 @@ h1 {
   -webkit-text-stroke-color: black;
   background-color: green;
   color: orangered;
-  border-radius: 0.5rem;
-  border: orangered;
+
+}
+
+h1 {
+  padding: 0.25rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: orangered;
+  margin-right: auto;
+}
+
+.hud {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .wherethedragonlives {
   flex-basis: auto;
   flex-grow: 1;
   display: flex;
-  max-height: 60vh;
   z-index: -1;
   align-items: center;
+  align-self: center;
   justify-items: center;
 }
 
 
-.answerarea {
+.answercontainer {
   display: flex;
-  margin-bottom: 5rem;
+  justify-items: center;
   gap: 0rem;
   padding: 0.25rem;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   background-color: green;
   color: orangered;
-  border-radius: 0.5rem;
-  border: orangered;
+  justify-items: center;
+
+
+  .answersmall {
+    margin: 0 auto auto;
+    display: flex;
+  }
 
   #question {
     font-size: 2rem;
@@ -73,6 +82,7 @@ h1 {
 
   #answer {
     width: 2rem;
+    align-self: center;
     font-size: 2rem;
     border: 0;
     background-color: green;
@@ -85,7 +95,7 @@ h1 {
 
 
 #result {
-  font-stretch: wider;
+  align-self: center;
   font-size: 2rem;
   flex-basis: 2rem;
 }
@@ -104,6 +114,6 @@ input[type=number] {
 
 @media (max-width: 600px) {
   .container {
-    height: 60vh;
+    height: 100vh;
   }
 }
