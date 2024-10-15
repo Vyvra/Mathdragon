@@ -89,3 +89,15 @@ h1 {
   font-size: 2rem;
   flex-basis: 2rem;
 }
+
+/*hide arrows from inputfield */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
