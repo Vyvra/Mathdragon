@@ -14,7 +14,7 @@ function poseQuestion() {
   a = question[0]
   b = question[1]
   let operator = question[2]
-  let posedQuestion = ['How much is ', a, operator, b, '?'].join('')
+  let posedQuestion = [a, " ", operator, " ", b, ' = '].join('')
   const container = document.querySelector('#question')
   container.innerHTML = posedQuestion
 
@@ -23,24 +23,24 @@ function poseQuestion() {
 function checkAnswer() {
   const answer = document.querySelector('input[id="answer"]');
   if (answer.value == (a + b)) {
-    document.getElementById('result').innerHTML = "Correct"
+    document.getElementById('result').innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
     score += 1;
     if (score % 10 == 0) {
       level += 1;
     }
   } else {
-    document.getElementById('result').innerHTML = "sorry the correct answer was { a + b }"
+    document.getElementById('result').innerHTML = "&#10062;&#10062;"
   }
   document.getElementById('answer').value = ""
 
 }
 function updateLevelAndScore() {
   // update score 
-  document.getElementById('score').innerHTML = "score : " + score
+  document.getElementById('score').innerHTML = "Score : " + score
   // update level
-  let dragonSize = ["font-size:", score + 10, "px"].join("")
+  let dragonSize = ["font-size:", score * 3 + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
-  document.getElementById('level').innerHTML = 'level : ' + level
+  // document.getElementById('level').innerHTML = ':evel : ' + level
 }
 
 

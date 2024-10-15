@@ -5,20 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <link href="css/style.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
   <script src="./game.js" defer></script>
 
 <body>
-  <h1> Mathdragon!</h1>
-  <div class="dragon" id="dragon"> &#128009</div>
-  <div id='level'>level:</div>
-  <div id='score'>score:</div>
-  <div id="question"></div>
-  <form id="answerbox">
-    <input type="text" id='answer'> <button type="submit" id='submit' hidden>isubmit</button>
-  </form>
-  <div id="result"></div>
-
+  <div class="container">
+    <h1> Mathdragon!</h1>
+    <div class="hud">
+      <!-- <div id='level'></div> -->
+      <div id='score'>score:</div>
+    </div>
+    <div class="wherethedragonlives">
+      <div class="dragon" id="dragon"> &#128009</div>
+    </div>
+    <div id="result"></div>
+    <div class="answerarea">
+      <div id="question"></div>
+      <form id="answerbox">
+        <input type="text" id='answer' placeholder=" ? " autofocus="autofocus"> <button type="submit" id='submit'
+          hidden></button>
+      </form>
+    </div>
+  </div>
 
   <script>
   </script>
