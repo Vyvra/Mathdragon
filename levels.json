@@ -1,0 +1,16 @@
+[
+    {
+      "level": 1
+      "maxTerm1": 5
+      "maxTerm2": 5
+      "operators": ["+"]
+    },
+    {
+      "level": 2
+      "maxTerm1": 5
+      "maxTerm2": 5
+      "operators": ["+", "-"]
+    }
+
+  ] 
+

@@ -1,35 +1,89 @@
-let level = 0;
-let score = 0;
+const LEVELDATA = [
+  {
+    "level": 1,
+    "maxTerm1": 5,
+    "maxTerm2": 5,
+    "allowNegative": false,
+    "operators": ["+"],
+  },
+  {
+    "level": 2,
+    "maxTerm1": 10,
+    "maxTerm2": 10,
+    "allowNegative": false,
+    "operators": ["+"],
+  },
+  {
+    "level": 3,
+    "maxTerm1": 5,
+    "maxTerm2": 5,
+    "allowNegative": false,
+    "operators": ["-"],
+  },
+  {
+    "level": 4,
+    "maxTerm1": 10,
+    "maxTerm2": 10,
+    "allowNegative": false,
+    "operators": ["+", "-"],
+  }
+]
 
-
-let a = 0;
-let b = 0;
-
-function getQuestion(level) {
-  let a = Math.floor(Math.random() * 10);
-  let b = Math.floor(Math.random() * 10);
-  return [a, b, "+"]
+function createQuestion(level) {
+  let leveldata
+  let maxlevel = LEVELDATA.length - 1
+  if (level > maxlevel) {
+    console.log(leveldata)
+    leveldata = LEVELDATA[maxlevel]
+  } else {
+    leveldata = LEVELDATA[level]
+  }
+  let term1 = Math.floor(Math.random() * leveldata.maxTerm1);
+  let term2 = Math.floor(Math.random() * leveldata.maxTerm2);
+  let operator = leveldata.operators[Math.floor(Math.random() * leveldata.operators.length)];
+  let prompt = [term1, " ", operator, " ", term2].join('')
+  let answer = eval(prompt)
+  if (!leveldata.allowNegative && answer < 0) {
+    retry = createQuestion(level)
+    prompt = retry[0]
+    answer = retry[1]
+  }
+  console.log([prompt, answer])
+  return [prompt, answer]
 }
+
+const playerScore = {
+  score: 0,
+  addScore: function () {
+    this.score += 1;
+    if (this.score % 20 == 0) {
+      playerLevel.addLevel()
+    }
+  }
+
+}
+
+const playerLevel = {
+  level: 0,
+  addLevel: function () { this.level += 1 }
+}
+
 
 function poseQuestion() {
-  let question = getQuestion(level)
-  a = question[0]
-  b = question[1]
-  let operator = question[2]
-  let posedQuestion = [a, " ", operator, " ", b, ' = '].join('')
+  let question = createQuestion(playerLevel.level)
+  let posedQuestion = [question[0], ' = '].join('')
   const container = document.querySelector('#question')
   container.innerHTML = posedQuestion
+  return question
 
 }
 
-function checkAnswer() {
+function checkAnswer(question) {
   const answer = document.querySelector('input[id="answer"]');
-  if (answer.value == (a + b)) {
+  console.log(["answer should be", question[1]], answer.value)
+  if (answer.value == question[1]) {
     document.getElementById('result').innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
-    score += 1;
-    if (score % 10 == 0) {
-      level += 1;
-    }
+    playerScore.addScore()
   } else {
     document.getElementById('result').innerHTML = "&#10062;&#10062;"
   }
@@ -38,34 +92,38 @@ function checkAnswer() {
 }
 function updateLevelAndScore() {
   // update score 
-  document.getElementById('score').innerHTML = "Score : " + score
-  localStorage.setItem("score", score)
+  document.getElementById('score').innerHTML = "Score : " + playerScore.score
+  localStorage.setItem("score", playerScore.score)
+  localStorage.setItem("level", playerLevel.level)
   // update level
-  let dragonSize = ["font-size:", (score * 4) + 20, "px"].join("")
+  let dragonSize = ["font-size:", (playerScore.score * 3) + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
-  // document.getElementById('level').innerHTML = ':evel : ' + level
+  document.getElementById('level').innerHTML = 'Level : ' + playerLevel.level
 }
 
 
 function gameloop(event) {
   console.log(localStorage.getItem("score"));
   event.preventDefault();
-  checkAnswer();
+  checkAnswer(question);
   updateLevelAndScore();
-  poseQuestion();
+  question = poseQuestion();
 }
 
+
+
+
 savedscore = localStorage.getItem('score')
-score += Number(savedscore)
+playerScore.score += Number(savedscore)
+savedlevel = localStorage.getItem('level')
+playerLevel.level += Number(savedlevel)
 updateLevelAndScore();
-poseQuestion();
+let question = poseQuestion();
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
 const reset = document.querySelector('#reset');
-reset.addEventListener("click", () => { score = 0; updateLevelAndScore(); })
+reset.addEventListener("click", () => { playerScore.score = 0; playerLevel.level = 0, updateLevelAndScore(); })
 
 
 
-
-// game()
