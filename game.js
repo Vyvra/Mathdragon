@@ -49,7 +49,7 @@ function createQuestion(level) {
     answer = retry[1]
   }
   console.log([prompt, answer])
-  return [prompt, answer]
+  return [prompt, answer, operator]
 }
 
 const playerScore = {
@@ -74,6 +74,12 @@ function poseQuestion() {
   let posedQuestion = [question[0], ' = '].join('')
   const container = document.querySelector('#question')
   container.innerHTML = posedQuestion
+  if (question[2] == "-") {
+    container.style.color = "aqua"
+  } else if (question[2] = "+") {
+    container.style.color = "orangered"
+
+  }
   return question
 
 }
@@ -82,10 +88,15 @@ function checkAnswer(question) {
   const answer = document.querySelector('input[id="answer"]');
   console.log(["answer should be", question[1]], answer.value)
   if (answer.value == question[1]) {
-    document.getElementById('result').innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
+    let result = document.getElementById('result')
+    result.className = 'fadereset'
+    result.innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
+    setTimeout(() => { result.className = 'fadeout' }, 300);
     playerScore.addScore()
   } else {
+    result.className = 'fadereset'
     document.getElementById('result').innerHTML = "&#10062;&#10062;"
+    setTimeout(() => { result.className = 'fadeout' }, 300);
   }
   document.getElementById('answer').value = ""
 
