@@ -69,9 +69,9 @@ const Player = {
   addScore: function () {
     this.score += 1;
     this.level = Math.floor(this.score / 20)
+    this.saveData()
     if (this.level > MAXLEVEL) {
       this.level = MAXLEVEL
-      this.saveData()
     }
   },
   saveData: function () {
