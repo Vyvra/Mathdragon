@@ -1,18 +1,23 @@
-const LEVELDATA = [
+const LEVELDATA = {
+  "dog":
   {
     "level": 1,
     "maxTerm1": 5,
     "maxTerm2": 5,
     "allowNegative": false,
     "operators": ["+"],
+    "unlockScore": 0
   },
+  "bear":
   {
     "level": 2,
     "maxTerm1": 10,
     "maxTerm2": 10,
     "allowNegative": false,
     "operators": ["+"],
+    "unlockScore": 20,
   },
+  "tiger":
   {
     "level": 3,
     "maxTerm1": 5,
@@ -20,6 +25,7 @@ const LEVELDATA = [
     "allowNegative": false,
     "operators": ["-"],
   },
+  "robot":
   {
     "level": 4,
     "maxTerm1": 10,
@@ -27,6 +33,7 @@ const LEVELDATA = [
     "allowNegative": false,
     "operators": ["+", "-"],
   },
+  "dragon":
   {
     "level": 5,
     "maxTerm1": 12,
@@ -34,6 +41,7 @@ const LEVELDATA = [
     "allowNegative": false,
     "operators": ["+", "-"],
   },
+  "superdragon":
   {
     "level": 6,
     "maxTerm1": 2,
@@ -73,6 +81,7 @@ function createQuestion(level) {
 const Player = {
   score: 0,
   level: 0,
+
   addScore: function () {
     this.score += 1;
     this.level = Math.floor(this.score / 20)
@@ -158,8 +167,21 @@ init()
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
-const reset = document.querySelector('#reset');
-reset.addEventListener("click", () => { Player.resetData() })
+// const reset = document.querySelector('#reset');
+// reset.addEventListener("click", () => { Player.resetData() })
+
+const menuButton = document.getElementById('menu');
+const floatingMenu = document.getElementById('floatingMenu');
+menuButton.addEventListener('click', () => {
+  floatingMenu.classList.toggle('hidden');
+});
+const closeMenu = document.getElementById('closeMenu');
+closeMenu.addEventListener('click', () => {
+  floatingMenu.classList.add('hidden');
+});
 
 
 
+
+
+let currentCharacter = LEVELDATA['name']

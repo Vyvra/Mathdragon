@@ -13,11 +13,12 @@
 
     <div class="top">
       <h1 id="name"> Mathdragon!</h1>
-      <a style="cursor :pointer;" id='reset'>Reset</a>
+      <!-- <a style="cursor :pointer;" id='reset'>Reset</a> -->
       <div class="hud">
         <div id='score'>Score:</div>
         <div id='level'>Level: </div>
       </div>
+      <button id="menu">☰</button>
     </div>
 
     <div class="wherethedragonlives">
@@ -28,18 +29,25 @@
       <div class="answersmall">
         <div id="question"></div>
         <form id="answerbox">
-
           <input type="number" id='answer' placeholder=" ? " autofocus="autofocus"> <button type="submit" id='submit'
             hidden></button>
-
         </form>
       </div>
     </div>
   </div>
 
+  <div id="floatingMenu" class="menu hidden">
+    <h2>Character select</h2>
+    <div class="character-select">
+      <button> 🐶</button>
+      <button>🐻</button>
+      <button> 🐯</button>
+      <button> 🤖</button>
+      <button> 🐲</button>
+    </div>
+    <button id="closeMenu">Close</button>
+  </div>
 
-  <script>
-  </script>
 </body>
 
 
