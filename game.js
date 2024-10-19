@@ -79,8 +79,8 @@ const Player = {
     localStorage.setItem("level", this.level)
   },
   loadData: function () {
-    this.score = Number(localStorage.getItem("score"))
-    this.level = Number(localStorage.getItem("level"))
+    this.score += Number(localStorage.getItem("score"))
+    this.level += Number(localStorage.getItem("level"))
   },
   resetData: function () {
     this.level = 0
