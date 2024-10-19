@@ -33,6 +33,13 @@ const LEVELDATA = [
     "maxTerm2": 12,
     "allowNegative": false,
     "operators": ["+", "-"],
+  },
+  {
+    "level": 6,
+    "maxTerm1": 2,
+    "maxTerm2": 10,
+    "allowNegative": false,
+    "operators": ["*", "-"],
   }
 ]
 
@@ -69,10 +76,10 @@ const Player = {
   addScore: function () {
     this.score += 1;
     this.level = Math.floor(this.score / 20)
-    this.saveData()
     if (this.level > MAXLEVEL) {
       this.level = MAXLEVEL
     }
+    this.saveData()
   },
   saveData: function () {
     localStorage.setItem("score", this.score)
@@ -107,7 +114,6 @@ function poseQuestion() {
 
 function checkAnswer(question) {
   const answer = document.querySelector('input[id="answer"]');
-  console.log(["answer should be", question[1]], answer.value)
   if (answer.value == question[1]) {
     let result = document.getElementById('result')
     result.className = 'fadereset'
