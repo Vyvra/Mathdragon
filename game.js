@@ -39,7 +39,7 @@ const LEVELDATA = [
     "maxTerm1": 2,
     "maxTerm2": 10,
     "allowNegative": false,
-    "operators": ["*", "-"],
+    "operators": ["*"],
   }
 ]
 
@@ -163,3 +163,32 @@ reset.addEventListener("click", () => { Player.resetData() })
 
 
 
+
+function pressKey(value) {
+  let answer = document.getElementById("answer");
+  answer.value += value;
+  let button = document.querySelector(`.key[data-value="${value}"]`);
+  activateKey(button);
+}
+
+function backspace() {
+  let answer = document.getElementById("answer");
+  answer.value = answer.value.slice(0, -1);
+}
+
+function submitInput() {
+  let answer = document.getElementById("answer");
+  gameloop(event)
+  answer.value = ''; // Clear input after submission
+  let button = document.querySelector(`.key:contains('↪')`);
+  activateKey(button);
+
+}
+function activateKey(key) {
+  if (key) {
+    key.classList.add('active');
+    setTimeout(() => {
+      key.classList.remove('active');
+    }, 10);
+  }
+}

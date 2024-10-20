@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
-  <title></title>
+  <title>Mathdragon!</title>
   <link href="styles.css" rel="stylesheet">
+  <link rel="manifest" href="/manifest.json">
   <script src="./game.js" defer></script>
 
 <body>
@@ -20,22 +21,42 @@
       </div>
     </div>
 
+
+
+
+
+    <div id="result"></div>
     <div class="wherethedragonlives">
       <div class="dragon" id="dragon"> &#128009</div>
     </div>
+
+
+
+
     <div class="answercontainer">
-      <div id="result"></div>
       <div class="answersmall">
         <div id="question"></div>
         <form id="answerbox">
 
-          <input type="tel" pattern="\d*" id='answer' placeholder=" ? " autofocus="autofocus"> <button type="submit"
-            id='submit' hidden></button>
-
+          <input id='answer' placeholder="  ? "></input> <button type="submit" hidden></button>
         </form>
       </div>
+      <div class="keypad">
+        <button class="key" data-value="1" onmousedown="pressKey('1')">1</button>
+        <button class="key" data-value="2" onmousedown="pressKey('2')">2</button>
+        <button class="key" data-value="3" onmousedown="pressKey('3')">3</button>
+        <button class="key" data-value="4" onmousedown="pressKey('4')">4</button>
+        <button class="key" data-value="5" onmousedown="pressKey('5')">5</button>
+        <button class="key" data-value="6" onmousedown="pressKey('6')">6</button>
+        <button class="key" data-value="7" onmousedown="pressKey('7')">7</button>
+        <button class="key" data-value="8" onmousedown="pressKey('8')">8</button>
+        <button class="key" data-value="9" onmousedown="pressKey('9')">9</button>
+        <button class="key" data-value="backspace" onmousedown="backspace()">⌫</button>
+        <button class="key" data-value="0" onmousedown="pressKey('0')">0</button>
+        <button class="key" data-value="enter" onmousedown="submitInput()">↪</button>
+      </div>
     </div>
-
+  </div>
   </div>
 
 
