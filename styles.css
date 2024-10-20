@@ -186,3 +186,10 @@ input[type=number] {
 .key.active {
   background-color: orangered;
 }
+
+@media (max-height: 500px) {
+  .keypad {
+    visibility: hidden;
+    height: 0px
+  }
+}
