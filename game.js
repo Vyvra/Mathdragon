@@ -36,10 +36,10 @@ const LEVELDATA = [
   },
   {
     "level": 6,
-    "maxTerm1": 2,
-    "maxTerm2": 10,
+    "maxTerm1": 14,
+    "maxTerm2": 14,
     "allowNegative": false,
-    "operators": ["*"],
+    "operators": ["+", "-"],
   }
 ]
 
