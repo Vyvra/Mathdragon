@@ -49,7 +49,6 @@ let question
 function createQuestion(level) {
   let leveldata
   if (level > MAXLEVEL) {
-    console.log(leveldata)
     leveldata = LEVELDATA[MAXLEVEL]
   } else {
     leveldata = LEVELDATA[level]
@@ -155,13 +154,14 @@ function init() {
 
 init()
 
+
+// keypadlogic
+
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
 const reset = document.querySelector('#reset');
 reset.addEventListener("click", () => { Player.resetData() })
-
-
 
 
 function pressKey(value) {
@@ -189,6 +189,6 @@ function activateKey(key) {
     key.classList.add('active');
     setTimeout(() => {
       key.classList.remove('active');
-    }, 10);
+    }, 100);
   }
 }
