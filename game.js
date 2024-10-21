@@ -1,54 +1,66 @@
-const LEVELDATA = {
-  "dog":
+const LEVELDATA = [
   {
     "level": 1,
+    "requiredScore": 0,
+    "name": "dog",
+    "symbol": "🐶",
     "maxTerm1": 5,
     "maxTerm2": 5,
     "allowNegative": false,
     "operators": ["+"],
     "unlockScore": 0
   },
-  "bear":
   {
     "level": 2,
+    "requiredScore": 20,
+    "name": "bear",
+    "symbol": "🐻",
     "maxTerm1": 10,
     "maxTerm2": 10,
     "allowNegative": false,
     "operators": ["+"],
     "unlockScore": 20,
   },
-  "tiger":
   {
     "level": 3,
+    "requiredScore": 60,
+    "name": "tiger",
+    "symbol": "🐯",
     "maxTerm1": 5,
     "maxTerm2": 5,
     "allowNegative": false,
     "operators": ["-"],
   },
-  "robot":
   {
     "level": 4,
+    "requiredScore": 90,
+    "name": "robot",
+    "symbol": "🤖",
     "maxTerm1": 10,
     "maxTerm2": 10,
     "allowNegative": false,
     "operators": ["+", "-"],
   },
-  "dragon":
   {
     "level": 5,
+    "requiredScore": 120,
+    "name": "dragon",
+    "symbol": "🐲",
     "maxTerm1": 12,
     "maxTerm2": 12,
     "allowNegative": false,
     "operators": ["+", "-"],
   },
-  "superdragon":
   {
     "level": 6,
+    "requiredScore": 150,
+    "name": "superdragon",
+    "symbol": "🀄",
     "maxTerm1": 2,
     "maxTerm2": 10,
     "allowNegative": false,
     "operators": ["*", "-"],
-  }
+  },
 ]
 
 const MAXLEVEL = LEVELDATA.length - 1
@@ -81,6 +93,7 @@ function createQuestion(level) {
 const Player = {
   score: 0,
   level: 0,
+  currentCharacter: LEVELDATA[0].symbol,
 
   addScore: function () {
     this.score += 1;
@@ -102,7 +115,7 @@ const Player = {
     this.level = 0
     this.score = 0
     this.saveData()
-    updateLevelAndScore()
+    drawScreen()
   }
 }
 
@@ -137,10 +150,11 @@ function checkAnswer(question) {
   document.getElementById('answer').value = ""
 
 }
-function updateLevelAndScore() {
+function drawScreen() {
   // update score 
-  document.getElementById('score').innerHTML = "Score : " + Player.score
-  document.getElementById('level').innerHTML = 'Level : ' + Player.level
+  document.getElementById('score').innerHTML = "Score : " + Player.score;
+  document.getElementById('level').innerHTML = 'Level : ' + Player.level;
+  document.getElementById('dragon').innerHTML = Player.currentCharacter
   let dragonSize = ["font-size:", (Math.sqrt(Player.score * 800)) + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
 }
@@ -150,17 +164,16 @@ function gameloop(event) {
   // stop page from reloading on submit: 
   event.preventDefault();
   checkAnswer(question);
-  updateLevelAndScore();
+  drawScreen();
   question = poseQuestion();
 }
 
 
 function init() {
   Player.loadData()
-  updateLevelAndScore();
+  drawScreen();
   question = poseQuestion();
 }
-
 
 init()
 
@@ -174,14 +187,31 @@ const menuButton = document.getElementById('menu');
 const floatingMenu = document.getElementById('floatingMenu');
 menuButton.addEventListener('click', () => {
   floatingMenu.classList.toggle('hidden');
+  populateCharacterSelect(Player);
 });
 const closeMenu = document.getElementById('closeMenu');
 closeMenu.addEventListener('click', () => {
   floatingMenu.classList.add('hidden');
 });
 
+function characterSelector(symbol) {
+  Player.currentCharacter = symbol;
+}
 
-
-
-
-let currentCharacter = LEVELDATA['name']
+function populateCharacterSelect(Player) {
+  let characterSelect = document.getElementById("character-select")
+  characterSelect.innerHTML = ""
+  for (let index = 0; index < LEVELDATA.length; index++) {
+    const levelbutton = document.createElement('button');
+    let buttonlabel
+    if (Player.score >= LEVELDATA[index].requiredScore) {
+      buttonlabel = document.createTextNode(LEVELDATA[index].symbol);
+      let charattribute = ["characterSelector('", buttonlabel.textContent, "')"].join("")
+      levelbutton.setAttribute("onclick", charattribute)
+    } else {
+      buttonlabel = document.createTextNode(" ? ");
+    }
+    characterSelect.appendChild(levelbutton)
+    levelbutton.appendChild(buttonlabel)
+  }
+}
