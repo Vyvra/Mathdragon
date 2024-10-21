@@ -6,6 +6,8 @@
   --font-family: "Roboto", sans-serif;
   --text-color: orangered;
   --menu-background: green;
+  --font-size: 2rem;
+
 }
 
 * {
@@ -43,8 +45,10 @@ html {
   font-size: 1rem;
   font-weight: bold;
   padding: 0.2rem 0.7rem;
+  margin-bottom: 0.5rem;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: black;
+  box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.75);
 
 
 }
@@ -104,11 +108,14 @@ h1 {
   background-color: green;
   color: orangered;
   justify-items: center;
+  box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.75);
 
 
-  .answersmall {
-    margin: 0 auto auto;
+  .answerSmall {
+    margin: 0 auto;
     display: flex;
+    position: relative;
+    left: 20px
   }
 
   #question {
@@ -117,7 +124,7 @@ h1 {
   }
 
   #answer {
-    width: 2rem;
+    width: 4rem;
     align-self: center;
     font-size: 2rem;
     font-weight: bold;
@@ -149,7 +156,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-/*fade out effect*/
+/* fade out effect*/
 .fadeout {
   visibility: hidden;
   opacity: 0;
@@ -184,4 +191,43 @@ input[type=number] {
 
 .hidden {
   display: none;
+}
+
+/* stuff to make keypad work */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+  padding: 5px 20px;
+  max-width: 600px;
+  align-self: center;
+}
+
+.key {
+  padding: 10px 20px;
+  font-size: var(--font-size);
+  font-weight: bold;
+  background-color: limegreen;
+  border: 1px solid darkgreen;
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  -webkit-box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.75);
+}
+
+.key.active {
+  background-color: orangered;
+}
+
+@media (max-height: 600px) {
+  .keypad {
+    visibility: hidden;
+    height: 0px
+  }
+
 }

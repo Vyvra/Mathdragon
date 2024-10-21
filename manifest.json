@@ -1,0 +1,18 @@
+
+    "lang": "en-us",
+    "name": "Mathdragon!",
+    "short_name": "Mathdragon!",
+    "description": "A simple game to help practice math, for children of around six years old",
+    "start_url": "/",
+    "background_color": "#2f3d58",
+    "theme_color": "#2f3d58",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/icon512.png",
+            "sizes": "512x512"
+        }
+    ]
+}
+

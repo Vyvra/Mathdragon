@@ -55,11 +55,11 @@ const LEVELDATA = [
     "requiredScore": 150,
     "name": "superdragon",
     "symbol": "🀄",
-    "maxTerm1": 2,
-    "maxTerm2": 10,
+    "maxTerm1": 14,
+    "maxTerm2": 14,
     "allowNegative": false,
-    "operators": ["*", "-"],
-  },
+    "operators": ["+", "-"],
+  }
 ]
 
 const MAXLEVEL = LEVELDATA.length - 1
@@ -68,7 +68,6 @@ let question
 function createQuestion(level) {
   let leveldata
   if (level > MAXLEVEL) {
-    console.log(leveldata)
     leveldata = LEVELDATA[MAXLEVEL]
   } else {
     leveldata = LEVELDATA[level]
@@ -207,6 +206,9 @@ function init() {
 
 init()
 
+
+// keypadlogic
+
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
@@ -245,5 +247,35 @@ function populateCharacterSelect(Player) {
     }
     characterSelect.appendChild(levelbutton)
     levelbutton.appendChild(buttonlabel)
+  }
+}
+
+
+function pressKey(value) {
+  let answer = document.getElementById("answer");
+  answer.value += value;
+  let button = document.querySelector(`.key[data-value="${value}"]`);
+  activateKey(button);
+}
+
+function backspace() {
+  let answer = document.getElementById("answer");
+  answer.value = answer.value.slice(0, -1);
+}
+
+function submitInput() {
+  let answer = document.getElementById("answer");
+  gameloop(event)
+  answer.value = ''; // Clear input after submission
+  let button = document.querySelector(`.key:contains('↪')`);
+  activateKey(button);
+
+}
+function activateKey(key) {
+  if (key) {
+    key.classList.add('active');
+    setTimeout(() => {
+      key.classList.remove('active');
+    }, 100);
   }
 }
