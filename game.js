@@ -120,7 +120,7 @@ const Player = {
   switchCharacter: function (newchar) {
     localStorage.setItem(this.currentCharacter, this.currentCharacterScore)
     this.currentCharacter = newchar
-    this.currentCharacterScore = localStorage.getItem(newchar)
+    this.currentCharacterScore = Number(localStorage.getItem(newchar))
   },
 
   addScore: function () {
