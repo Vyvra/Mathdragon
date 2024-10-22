@@ -166,12 +166,12 @@ function checkAnswer(question) {
   if (answer.value == question[1]) {
     let result = document.getElementById('result')
     result.className = 'fadereset'
-    result.textContent = "&#128293;&#128293;&#9989;&#128293;&#128293;"
+    result.innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
     setTimeout(() => { result.className = 'fadeout' }, 300);
     Player.setScore(1)
   } else {
     result.className = 'fadereset'
-    document.getElementById('result').textContent = "&#10062;&#10062;"
+    document.getElementById('result').innerHTML = "&#10062;&#10062;"
     setTimeout(() => { result.className = 'fadeout' }, 300);
   }
   document.getElementById('answer').value = ""
