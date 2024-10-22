@@ -152,7 +152,7 @@ function poseQuestion() {
   let question = createQuestion(Player.level)
   let posedQuestion = [question[0], ' = '].join('')
   const container = document.querySelector('#question')
-  container.innerHTML = posedQuestion
+  container.textContent = posedQuestion
   if (question[2] == "-") {
     container.style.color = "aqua"
   } else if (question[2] = "+") {
@@ -166,12 +166,12 @@ function checkAnswer(question) {
   if (answer.value == question[1]) {
     let result = document.getElementById('result')
     result.className = 'fadereset'
-    result.innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
+    result.textContent = "&#128293;&#128293;&#9989;&#128293;&#128293;"
     setTimeout(() => { result.className = 'fadeout' }, 300);
     Player.setScore(1)
   } else {
     result.className = 'fadereset'
-    document.getElementById('result').innerHTML = "&#10062;&#10062;"
+    document.getElementById('result').textContent = "&#10062;&#10062;"
     setTimeout(() => { result.className = 'fadeout' }, 300);
   }
   document.getElementById('answer').value = ""
@@ -179,9 +179,9 @@ function checkAnswer(question) {
 }
 function drawScreen() {
   // update score 
-  document.getElementById('score').innerHTML = "Score : " + Player.score;
-  document.getElementById('level').innerHTML = 'Level : ' + Player.level;
-  document.getElementById('dragon').innerHTML = Player.currentCharacter
+  document.getElementById('score').textContent = "Score : " + Player.score;
+  document.getElementById('level').textContent = 'Level : ' + Player.level;
+  document.getElementById('dragon').textContent = Player.currentCharacter
   let dragonSize = ["font-size:", (Math.sqrt(Player.currentCharacterScore * 800)) + 20, "px"].join("")
   document.getElementById('dragon').setAttribute("style", dragonSize)
 }
@@ -224,7 +224,7 @@ reset.addEventListener("click", () => {
       floatingMenu.classList.add('hidden')
       resetBtn = document.createElement("button")
       resetBtn.setAttribute("id", "reset")
-      resetBtn.innerHTML = "Reset"
+      resetBtn.textContent = "Reset"
       resetBtn.style.backgroundColor = "red"
       resetbox = document.querySelector("#resetbox")
       resetbox.replaceWith(resetBtn)
@@ -253,7 +253,7 @@ function characterSelector(symbol) {
 
 function populateCharacterSelect(Player) {
   let characterSelect = document.getElementById("character-select")
-  characterSelect.innerHTML = ""
+  characterSelect.textContent = ""
   for (let index = 0; index < LEVELDATA.length; index++) {
     const levelbutton = document.createElement('button');
     let buttonlabel
