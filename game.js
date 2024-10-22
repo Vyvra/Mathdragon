@@ -25,7 +25,7 @@ const LEVELDATA = [
     "requiredScore": 60,
     "name": "tiger",
     "symbol": "🦈",
-    "maxTerm1": 5,
+    "maxTerm1": 7,
     "maxTerm2": 5,
     "allowNegative": false,
     "operators": ["-"],
@@ -43,8 +43,8 @@ const LEVELDATA = [
   {
     "level": 4,
     "requiredScore": 120,
-    "name": "dragon",
-    "symbol": "🐲",
+    "name": "T-rex",
+    "symbol": "🦖",
     "maxTerm1": 12,
     "maxTerm2": 12,
     "allowNegative": false,
@@ -54,7 +54,7 @@ const LEVELDATA = [
     "level": 5,
     "requiredScore": 150,
     "name": "superdragon",
-    "symbol": "🀄",
+    "symbol": "🐉",
     "maxTerm1": 14,
     "maxTerm2": 14,
     "allowNegative": false,
@@ -63,6 +63,7 @@ const LEVELDATA = [
 ]
 
 const MAXLEVEL = LEVELDATA.length - 1
+
 let question
 
 function createQuestion(level) {
@@ -88,9 +89,10 @@ function createQuestion(level) {
   return [prompt, answer, operator]
 }
 
-const getLevelDataFromSymbol = (symbol) => {
+function getLevelDataFromSymbol(symbol) {
   for (let index = 0; index < LEVELDATA.length; index++) {
-    if (LEVELDATA[index].symbol == symbol); {
+    levelsymbol = LEVELDATA[index].symbol
+    if (levelsymbol == symbol) {
       return LEVELDATA[index].level
     }
   }
@@ -98,13 +100,14 @@ const getLevelDataFromSymbol = (symbol) => {
 
 const Player = {
   score: 0,
-  level: 0,
   currentCharacter: LEVELDATA[0].symbol,
   currentCharacterScore: 0,
-
+  level: 0,
   setScore: function (int) {
     this.currentCharacterScore += int;
+    this.score += int
     localStorage.setItem(getLevelDataFromSymbol(this.currentCharacter), Number(this.currentCharacterScore))
+    localStorage.setItem("score", this.score)
     for (let index = 0; index < LEVELDATA.length; index++) {
       if (LEVELDATA[index].requiredScore == this.score) {
         this.switchCharacter(LEVELDATA[index].symbol)
@@ -112,7 +115,6 @@ const Player = {
       if (LEVELDATA[index].requiredScore < this.score) {
         this.level = LEVELDATA[index].level
       }
-
     }
   },
 
@@ -120,28 +122,25 @@ const Player = {
     localStorage.setItem(this.currentCharacter, this.currentCharacterScore)
     this.currentCharacter = newchar
     this.currentCharacterScore = Number(localStorage.getItem(newchar))
+    this.level = getLevelDataFromSymbol(this.currentCharacter)
+    localStorage.setItem("currentCharacter", this.currentCharacter)
+    drawScreen()
   },
 
-  addScore: function () {
-    this.score += 1;
-    if (this.level > MAXLEVEL) {
-      this.level = MAXLEVEL
-    }
-    this.saveData()
-  },
-  saveData: function () {
-    localStorage.setItem("score", this.score)
-    localStorage.setItem("level", this.level)
-  },
   loadData: function () {
     this.score += Number(localStorage.getItem("score"))
-    this.level += Number(localStorage.getItem("level"))
+    this.currentCharacter = localStorage.getItem("currentCharacter")
+    if (localStorage.getItem("currentCharacter")) {
+      this.currentCharacter = localStorage.getItem("currentCharacter")
+    } else {
+      this.currentCharacter = LEVELDATA[0].symbol
+    }
     this.currentCharacterScore += Number(localStorage.getItem(this.currentCharacter))
   },
   resetData: function () {
-    this.level = 0
     this.score = 0
     localStorage.clear()
+    this.currentCharacter = LEVELDATA[0].symbol
     init()
     drawScreen()
   }
@@ -157,7 +156,6 @@ function poseQuestion() {
     container.style.color = "aqua"
   } else if (question[2] = "+") {
     container.style.color = "orangered"
-
   }
   return question
 }
@@ -169,7 +167,6 @@ function checkAnswer(question) {
     result.className = 'fadereset'
     result.innerHTML = "&#128293;&#128293;&#9989;&#128293;&#128293;"
     setTimeout(() => { result.className = 'fadeout' }, 300);
-    Player.addScore()
     Player.setScore(1)
   } else {
     result.className = 'fadereset'
@@ -188,7 +185,6 @@ function drawScreen() {
   document.getElementById('dragon').setAttribute("style", dragonSize)
 }
 
-
 function gameloop(event) {
   // stop page from reloading on submit: 
   event.preventDefault();
@@ -197,7 +193,7 @@ function gameloop(event) {
   question = poseQuestion();
 }
 
-
+// on page load: load data and render screen
 function init() {
   Player.loadData()
   drawScreen();
@@ -207,13 +203,34 @@ function init() {
 init()
 
 
-// keypadlogic
+// character selection screen
 
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
 const reset = document.querySelector('#reset');
-reset.addEventListener("click", () => { Player.resetData() })
+reset.addEventListener("click", () => {
+  resetbox = document.querySelector("#reset")
+  resettext = document.createElement("input")
+  resettext.setAttribute("type", "text")
+  resettext.setAttribute("placeholder", "Type RESET to reset")
+  resettext.setAttribute("id", "resetbox")
+  resetbox.replaceWith(resettext);
+  reallyReset = document.querySelector("#resetbox")
+  reallyReset.addEventListener("input", (event) => {
+    if (reallyReset.value == ('RESET' || 'reset')) {
+      Player.resetData()
+      floatingMenu.classList.add('hidden')
+      resetBtn = document.createElement("button")
+      resetBtn.setAttribute("id", "reset")
+      resetBtn.innerHTML = "Reset"
+      resetBtn.style.backgroundColor = "red"
+      resetbox = document.querySelector("#resetbox")
+      resetbox.replaceWith(resetBtn)
+
+    }
+  })
+})
 
 const menuButton = document.getElementById('menu');
 const floatingMenu = document.getElementById('floatingMenu');
@@ -250,6 +267,8 @@ function populateCharacterSelect(Player) {
   }
 }
 
+
+// keypad logic
 
 function pressKey(value) {
   let answer = document.getElementById("answer");
