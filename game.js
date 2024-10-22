@@ -208,64 +208,65 @@ init()
 const btn = document.querySelector('#answerbox');
 btn.addEventListener('submit', gameloop);
 
-const reset = document.querySelector('#reset');
-reset.addEventListener("click", () => {
-  resetbox = document.querySelector("#reset")
-  resettext = document.createElement("input")
-  resettext.setAttribute("type", "text")
-  resettext.setAttribute("placeholder", "Type RESET to reset")
-  resettext.setAttribute("id", "resetbox")
-  resetbox.replaceWith(resettext);
-  reallyReset = document.querySelector("#resetbox")
-  reallyReset.addEventListener("input", (event) => {
-    if (reallyReset.value == ('RESET' || 'reset')) {
-      Player.resetData()
-      floatingMenu.classList.add('hidden')
-      resetBtn = document.createElement("button")
-      resetBtn.setAttribute("id", "reset")
-      resetBtn.innerHTML = "Reset"
-      resetBtn.style.backgroundColor = "red"
-      resetbox = document.querySelector("#resetbox")
-      resetbox.replaceWith(resetBtn)
+// const reset = document.querySelector('#reset');
+// reset.addEventListener("click", () => {
+//   resetbox = document.querySelector("#reset")
+//   resettext = document.createElement("input")
+//   resettext.setAttribute("type", "text")
+//   resettext.setAttribute("placeholder", "Type RESET to reset")
+//   resettext.setAttribute("id", "resetbox")
+//   resetbox.replaceWith(resettext);
+//   reallyReset = document.querySelector("#resetbox")
+//   reallyReset.addEventListener("input", (event) => {
+//     if (reallyReset.value == ('RESET' || 'reset')) {
+//       Player.resetData()
+//       floatingMenu.classList.add('hidden')
+//       resetBtn = document.createElement("button")
+//       resetBtn.setAttribute("id", "reset")
+//       resetBtn.innerHTML = "Reset"
+//       resetBtn.style.backgroundColor = "red"
+//       resetbox = document.querySelector("#resetbox")
+//       resetbox.replaceWith(resetBtn)
+//
+//
+//     }
+//   })
+// })
 
-    }
-  })
-})
-
-const menuButton = document.getElementById('menu');
-const floatingMenu = document.getElementById('floatingMenu');
-menuButton.addEventListener('click', () => {
-  floatingMenu.classList.toggle('hidden');
-  populateCharacterSelect(Player);
-});
-const closeMenu = document.getElementById('closeMenu');
-closeMenu.addEventListener('click', () => {
-  floatingMenu.classList.add('hidden');
-});
-
-function characterSelector(symbol) {
-  Player.switchCharacter(symbol);
-  drawScreen()
-  floatingMenu.classList.add('hidden');
-}
-
-function populateCharacterSelect(Player) {
-  let characterSelect = document.getElementById("character-select")
-  characterSelect.innerHTML = ""
-  for (let index = 0; index < LEVELDATA.length; index++) {
-    const levelbutton = document.createElement('button');
-    let buttonlabel
-    if (Player.score >= LEVELDATA[index].requiredScore) {
-      buttonlabel = document.createTextNode(LEVELDATA[index].symbol);
-      let charattribute = ["characterSelector('", buttonlabel.textContent, "')"].join("")
-      levelbutton.setAttribute("onclick", charattribute)
-    } else {
-      buttonlabel = document.createTextNode(" ? ");
-    }
-    characterSelect.appendChild(levelbutton)
-    levelbutton.appendChild(buttonlabel)
-  }
-}
+// const menuButton = document.getElementById('menu');
+// const floatingMenu = document.getElementById('floatingMenu');
+// menuButton.addEventListener('click', () => {
+//   floatingMenu.classList.toggle('hidden');
+//   populateCharacterSelect(Player);
+// });
+// const closeMenu = document.getElementById('closeMenu');
+// closeMenu.addEventListener('click', () => {
+//   floatingMenu.classList.add('hidden');
+// });
+//
+// function characterSelector(symbol) {
+//   Player.switchCharacter(symbol);
+//   drawScreen()
+//   floatingMenu.classList.add('hidden');
+// }
+//
+// function populateCharacterSelect(Player) {
+//   let characterSelect = document.getElementById("character-select")
+//   characterSelect.innerHTML = ""
+//   for (let index = 0; index < LEVELDATA.length; index++) {
+//     const levelbutton = document.createElement('button');
+//     let buttonlabel
+//     if (Player.score >= LEVELDATA[index].requiredScore) {
+//       buttonlabel = document.createTextNode(LEVELDATA[index].symbol);
+//       let charattribute = ["characterSelector('", buttonlabel.textContent, "')"].join("")
+//       levelbutton.setAttribute("onclick", charattribute)
+//     } else {
+//       buttonlabel = document.createTextNode(" ? ");
+//     }
+//     characterSelect.appendChild(levelbutton)
+//     levelbutton.appendChild(buttonlabel)
+//   }
+// }
 
 
 // keypad logic
