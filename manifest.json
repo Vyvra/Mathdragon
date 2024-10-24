@@ -3,21 +3,18 @@
     "name": "Mathdragon!",
     "short_name": "Mathdragon!",
     "description": "A simple game to help practice math, for children of around six years old",
-    "start_url": "/Mathdragon/",
+    "start_url": "/",
     "background_color": "#2f3d58",
-    "theme_color": "#2f3d58",
+    "theme_color":"#008000",
     "orientation": "any",
     "display": "standalone",
     "icons": [ 
     {
-      "src":"/favicon/android-chrome-192x192.png",
+      "src":"Mathdragon/favicon/android-chrome-192x192.png",
       "sizes":"192x192",
       "type":"image/png"
     },{
-      "src":"/favicon/android-chrome-512x512.png",
+      "src":"Mathdragon/favicon/android-chrome-512x512.png",
       "sizes":"512x512",
       "type":"image/png"}],
-    "theme_color":"#008000",
-    "background_color":"#ffffff",
-    "display":"standalone"
 }
