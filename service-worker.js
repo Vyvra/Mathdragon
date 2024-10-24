@@ -1,7 +1,7 @@
 // PWA settings
 const CACHE_NAME = 'pwa-cache-v1';
 const urlsToCache = [
-  '/',
+  './',
   // './styes.css',
   // './game.js',
 ];
