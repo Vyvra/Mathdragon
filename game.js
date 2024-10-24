@@ -102,19 +102,18 @@ const Player = {
   score: 0,
   currentCharacter: LEVELDATA[0].symbol,
   currentCharacterScore: 0,
+  currentLevel: LEVELDATA[getLevelDataFromSymbol(this.currentCharacter)],
   level: 0,
   setScore: function (int) {
     this.currentCharacterScore += int;
     this.score += int
     localStorage.setItem(getLevelDataFromSymbol(this.currentCharacter), Number(this.currentCharacterScore))
     localStorage.setItem("score", this.score)
+    // Switch character on levelup and show level up splash
     for (let index = 0; index < LEVELDATA.length; index++) {
       if (LEVELDATA[index].requiredScore == this.score) {
         this.switchCharacter(LEVELDATA[index].symbol)
         showLevelUpSplash()
-      }
-      if (LEVELDATA[index].requiredScore < this.score) {
-        this.level = LEVELDATA[index].level
       }
     }
   },
@@ -247,7 +246,7 @@ closeMenu.addEventListener('click', () => {
 
 function characterSelector(symbol) {
   Player.switchCharacter(symbol);
-  drawScreen()
+  init()
   floatingMenu.classList.add('hidden');
 }
 
