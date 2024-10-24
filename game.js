@@ -142,14 +142,14 @@ const Player = {
   },
 
   loadData: function () {
-    this.score += Number(localStorage.getItem("score"))
+    this.score = Number(localStorage.getItem("score"))
     this.currentCharacter = localStorage.getItem("currentCharacter")
     if (localStorage.getItem("currentCharacter")) {
       this.currentCharacter = localStorage.getItem("currentCharacter")
     } else {
       this.currentCharacter = LEVELDATA[0].symbol
     }
-    this.currentCharacterScore += Number(localStorage.getItem(this.currentCharacter))
+    this.currentCharacterScore = Number(localStorage.getItem(this.currentCharacter))
   },
   resetData: function () {
     this.score = 0
