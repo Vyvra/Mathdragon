@@ -250,12 +250,13 @@ input[type=number] {
   background-color: orangered;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 450px) {
   .keypad {
     visibility: hidden;
     height: 0px
   }
 }
+
 
 #splash {
   position: absolute;
