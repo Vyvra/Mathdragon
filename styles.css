@@ -216,6 +216,7 @@ input[type=number] {
 
 .hidden {
   display: none;
+  z-index: -1000;
 }
 
 /* stuff to make keypad work */
@@ -270,7 +271,7 @@ input[type=number] {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   opacity: 0;
-  z-index: 1000;
+  /*z-index: 1000;*/
   transition: opacity 0.5s ease;
 }
 
@@ -279,4 +280,5 @@ input[type=number] {
 
 #splash.show {
   opacity: 1;
+  z-index: 1000;
 }
