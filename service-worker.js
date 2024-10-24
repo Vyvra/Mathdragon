@@ -1,9 +1,9 @@
 // PWA settings
 const CACHE_NAME = 'pwa-cache-v1';
 const urlsToCache = [
-  '',
-  // './styes.css',
-  // './game.js',
+  '/Mathdragon/index.html',
+  //Mathdragon/styes.css',
+  // 'MathDragon/game.js',
 ];
 
 self.addEventListener('install', (event) => {
