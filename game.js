@@ -73,6 +73,36 @@ const LEVELDATA = [
     "maxTerm2": 14,
     "allowNegative": false,
     "operators": ["+", "-"],
+  },
+  {
+    "level": 6,
+    "requiredScore": 180,
+    "name": "superdragon",
+    "symbol": "🦸",
+    "maxTerm1": 16,
+    "maxTerm2": 16,
+    "allowNegative": false,
+    "operators": ["+", "-"],
+  },
+  {
+    "level": 7,
+    "requiredScore": 210,
+    "name": "superdragon",
+    "symbol": "🏎️",
+    "maxTerm1": 18,
+    "maxTerm2": 18,
+    "allowNegative": false,
+    "operators": ["+", "-"],
+  },
+  {
+    "level": 8,
+    "requiredScore": 240,
+    "name": "superdragon",
+    "symbol": "🏹",
+    "maxTerm1": 18,
+    "maxTerm2": 18,
+    "allowNegative": true,
+    "operators": ["+", "-"],
   }
 ]
 
