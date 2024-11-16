@@ -1,3 +1,4 @@
+// required code for PWA
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/Mathdragon/service-worker.js')
@@ -9,7 +10,6 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
-
 
 
 const LEVELDATA = [
@@ -77,7 +77,7 @@ const LEVELDATA = [
   {
     "level": 6,
     "requiredScore": 180,
-    "name": "superdragon",
+    "name": "superhero",
     "symbol": "🦸",
     "maxTerm1": 16,
     "maxTerm2": 16,
@@ -87,7 +87,7 @@ const LEVELDATA = [
   {
     "level": 7,
     "requiredScore": 210,
-    "name": "superdragon",
+    "name": "racecar",
     "symbol": "🏎️",
     "maxTerm1": 18,
     "maxTerm2": 18,
@@ -97,7 +97,7 @@ const LEVELDATA = [
   {
     "level": 8,
     "requiredScore": 240,
-    "name": "superdragon",
+    "name": "bow",
     "symbol": "🏹",
     "maxTerm1": 18,
     "maxTerm2": 18,
@@ -144,15 +144,15 @@ function getLevelDataFromSymbol(symbol) {
 
 const Player = {
   score: 0,
+  level: 0,
   currentCharacter: LEVELDATA[0].symbol,
   currentCharacterScore: 0,
-  currentLevel: LEVELDATA[getLevelDataFromSymbol(this.currentCharacter)],
-  level: 0,
   setScore: function (int) {
     this.currentCharacterScore += int;
     this.score += int
     localStorage.setItem(getLevelDataFromSymbol(this.currentCharacter), Number(this.currentCharacterScore))
     localStorage.setItem("score", this.score)
+    localStorage.setItem("level", this.level)
     // Switch character on levelup and show level up splash
     for (let index = 0; index < LEVELDATA.length; index++) {
       if (LEVELDATA[index].requiredScore == this.score) {
@@ -168,11 +168,13 @@ const Player = {
     this.currentCharacterScore = Number(localStorage.getItem(newchar))
     this.level = getLevelDataFromSymbol(this.currentCharacter)
     localStorage.setItem("currentCharacter", this.currentCharacter)
+    localStorage.setItem("level", this.level)
     drawScreen()
   },
 
   loadData: function () {
     this.score = Number(localStorage.getItem("score"))
+    this.level = Number(localStorage.getItem("level"))
     this.currentCharacter = localStorage.getItem("currentCharacter")
     if (localStorage.getItem("currentCharacter")) {
       this.currentCharacter = localStorage.getItem("currentCharacter")
@@ -183,6 +185,7 @@ const Player = {
   },
   resetData: function () {
     this.score = 0
+    this.level = 0
     localStorage.clear()
     this.currentCharacter = LEVELDATA[0].symbol
     init()
